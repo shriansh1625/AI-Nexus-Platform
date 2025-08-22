@@ -1,0 +1,103 @@
+/* --- Base and Fonts --- */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #030014; /* Deep space blue */
+}
+
+/* --- Animations --- */
+@keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-in-left {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+@keyframes title-breathing {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.05); opacity: 1; }
+}
+.animate-fade-in-up { animation: fade-in-up 0.6s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards; }
+.animate-slide-in-left { animation: slide-in-left 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards; }
+.title-icon-breathing { animation: title-breathing 4s ease-in-out infinite; }
+
+/* --- Auth Screen Styling --- */
+.auth-panel {
+    background: rgba(10, 10, 20, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+.auth-input {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+.auth-input:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.4), 0 0 15px rgba(79, 70, 229, 0.3);
+}
+.btn-primary { 
+    background-color: #4f46e5; 
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(79, 70, 229, 0.5);
+}
+.btn-primary:hover { 
+    background-color: #6366f1;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(79, 70, 229, 0.6);
+}
+.btn-primary:active {
+    transform: translateY(-1px) scale(0.98);
+}
+.btn-secondary { background-color: rgba(255, 255, 255, 0.1); transition: all 0.3s ease; }
+.btn-secondary:hover { background-color: rgba(255, 255, 255, 0.2); transform: translateY(-2px); }
+.btn-google { background-color: #ffffff; color: #1f2937; transition: all 0.3s ease; }
+.btn-google:hover { background-color: #e5e7eb; transform: translateY(-2px); }
+
+
+/* --- Chat Area Styling --- */
+.chat-container::-webkit-scrollbar { width: 6px; }
+.chat-container::-webkit-scrollbar-track { background: transparent; }
+.chat-container::-webkit-scrollbar-thumb { background-color: rgba(255, 255, 255, 0.2); border-radius: 20px; }
+
+/* New Chat button glow */
+#new-chat-btn {
+    background-color: #4f46e5;
+    box-shadow: 0 0 15px rgba(79, 70, 229, 0.5);
+    transition: all 0.3s ease;
+}
+#new-chat-btn:hover {
+    background-color: #6366f1;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(79, 70, 229, 0.6);
+}
+
+/* Conversation history hover effect */
+#conversation-history > div {
+    transition: all 0.2s ease-in-out;
+}
+#conversation-history > div:hover {
+    background-color: rgba(79, 70, 229, 0.3);
+    transform: translateX(5px);
+}
+
+/* Chat bubble entrance animation */
+#chat-container > div {
+    animation: fade-in-up 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards;
+}
+
+
+/* --- Typing Indicator --- */
+.typing-indicator { display: flex; align-items: center; padding: 10px 0; }
+.typing-indicator .dot {
+    height: 8px; width: 8px; background-color: #a5b4fc; border-radius: 50%;
+    margin: 0 3px; animation: wave 1.4s ease-in-out infinite;
+}
+.typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes wave {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(-6px); opacity: 1; }
+}

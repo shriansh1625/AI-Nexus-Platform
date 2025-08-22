@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Nexus - Your Multi-AI Platform</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-900 text-white flex h-screen overflow-hidden">
+
+    <!-- Particle Animation Canvas -->
+    <canvas id="particle-canvas" class="absolute top-0 left-0 w-full h-full z-0"></canvas>
+
+    <!-- NEW: About Creator Button -->
+    <a href="https://shriansh-portfolio.vercel.app/" target="_blank" class="about-creator-btn absolute top-4 right-4 z-20">
+        <i class="fas fa-user-circle mr-2"></i>
+        About the Creator
+    </a>
+
+
+    <!-- Authentication Screen -->
+    <div id="auth-screen" class="flex flex-col items-center justify-center w-full h-full absolute z-10">
+        <div class="auth-panel w-full max-w-md p-8 rounded-2xl shadow-lg text-center animate-fade-in-up">
+            <h1 class="text-4xl font-bold mb-2">Welcome to AI Nexus</h1>
+            <p class="text-gray-300 mb-8">Your unified AI workspace.</p>
+            
+            <div id="email-form">
+                <input type="email" id="email" placeholder="Email" class="auth-input w-full p-3 rounded-lg mb-4" />
+                <input type="password" id="password" placeholder="Password" class="auth-input w-full p-3 rounded-lg mb-4" />
+                <button id="email-login-btn" class="btn-primary w-full font-bold py-3 rounded-lg transition duration-300 mb-2">Sign In</button>
+                <button id="email-signup-btn" class="btn-secondary w-full font-bold py-3 rounded-lg transition duration-300">Sign Up</button>
+            </div>
+
+            <div class="my-4 flex items-center">
+                <hr class="w-full border-gray-600" />
+                <span class="px-2 text-gray-400 text-sm">OR</span>
+                <hr class="w-full border-gray-600" />
+            </div>
+
+            <button id="google-signin-btn" class="btn-google w-full font-semibold py-3 rounded-lg flex items-center justify-center transition duration-300">
+                <i class="fab fa-google mr-3"></i>
+                Sign In with Google
+            </button>
+            <p id="auth-error" class="text-red-400 mt-4 h-4"></p>
+        </div>
+    </div>
+
+    <!-- Main Application UI (Hidden by default) -->
+    <div id="app" class="hidden flex w-full h-full z-10">
+        <!-- Sidebar -->
+        <aside class="w-1/4 max-w-xs bg-black/30 backdrop-blur-md p-4 flex flex-col border-r border-white/10 animate-slide-in-left">
+            <h2 class="text-2xl font-bold mb-6 px-2">Conversations</h2>
+            <div id="conversation-history" class="flex-grow overflow-y-auto pr-2">
+                <!-- Conversation history will be populated here -->
+            </div>
+            <div class="mt-auto">
+                <div id="user-profile" class="flex items-center mb-4 p-2 rounded-lg hover:bg-white/5 transition-colors">
+                    <!-- User info here -->
+                </div>
+                <button id="logout-btn" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="w-3/4 flex flex-col h-screen bg-black/10 backdrop-blur-sm">
+            <header class="p-4 border-b border-white/10 flex justify-center items-center">
+                 <div class="flex items-center space-x-4 bg-black/20 p-2 rounded-lg">
+                    <label class="font-semibold">AI Model:</label>
+                    <select id="model-selector" class="bg-gray-700/50 text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="gemini">Google Gemini</option>
+                        <option value="deepseek">DeepSeek</option>
+                    </select>
+                </div>
+            </header>
+            
+            <div id="chat-container" class="flex-grow p-6 overflow-y-auto chat-container">
+                <div class="flex justify-center items-center h-full animate-fade-in-up">
+                    <div class="text-center">
+                         <i class="fas fa-robot text-6xl text-gray-500 mb-4 title-icon-breathing"></i>
+                        <h1 class="text-4xl font-bold">AI Nexus</h1>
+                        <p class="text-gray-400 mt-2">Your conversation begins here. Select a model to get started.</p>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="p-4">
+                <div class="max-w-4xl mx-auto">
+                    <div class="flex items-center bg-black/30 border border-white/10 rounded-lg p-2 shadow-lg focus-within:ring-2 focus-within:ring-blue-500 transition-shadow">
+                        <textarea id="message-input" class="w-full bg-transparent text-white p-2 focus:outline-none resize-none" placeholder="Type your message..." rows="1"></textarea>
+                        <button id="send-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold w-10 h-10 rounded-lg ml-2 transition duration-300 flex items-center justify-center">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>
