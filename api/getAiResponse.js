@@ -1,12 +1,22 @@
 // This is a Vercel Serverless Function
 // It securely runs on the backend, just like the Firebase Function.
 
+// We need to import the GoogleGenerativeAI package
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
 export default async function handler(request, response) {
     // Handle CORS preflight requests
     if (request.method === 'OPTIONS') {
+        response.setHeader('Access-Control-Allow-Origin', '*');
+        response.setHeader('Access-Control-Allow-Methods', 'POST');
+        response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
         response.status(200).end();
         return;
     }
+    
+    // Set CORS headers for the main request
+    response.setHeader('Access-Control-Allow-Origin', '*');
+
 
     // Get the secret API keys from Vercel's Environment Variables
     const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
@@ -17,7 +27,26 @@ export default async function handler(request, response) {
 
         let aiResponseText = "";
 
-        if (model === 'deepseek') {
+        // --- NEW: Added Gemini Logic ---
+        if (model === 'gemini') {
+            const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+            const geminiModel = genAI.getGenerativeModel({ model: "gemini-pro" });
+
+            // Convert the conversation history to the format Gemini expects
+            const geminiHistory = conversationHistory.map(message => ({
+                role: message.role === 'assistant' ? 'model' : 'user',
+                parts: [{ text: message.content }]
+            }));
+            
+            // The last message is the new prompt
+            const lastMessage = geminiHistory.pop();
+
+            const chat = geminiModel.startChat({ history: geminiHistory });
+            const result = await chat.sendMessage(lastMessage.parts[0].text);
+            const geminiResponse = await result.response;
+            aiResponseText = geminiResponse.text();
+
+        } else if (model === 'deepseek') {
             const apiResponse = await fetch("https://openrouter.ai/api/v1/chat/completions", {
                 method: "POST",
                 headers: {
@@ -26,7 +55,7 @@ export default async function handler(request, response) {
                 },
                 body: JSON.stringify({
                     "model": "deepseek/deepseek-chat",
-                    "messages": conversationHistory // Send the history from the frontend
+                    "messages": conversationHistory
                 })
             });
 
@@ -38,8 +67,7 @@ export default async function handler(request, response) {
             const data = await apiResponse.json();
             aiResponseText = data.choices[0].message.content;
         } else {
-            // Placeholder for Gemini or other models if you add them back later
-            aiResponseText = "This model is currently unavailable.";
+            aiResponseText = "Invalid model selected.";
         }
         
         // Send the successful response back to the frontend
