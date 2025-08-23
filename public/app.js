@@ -24,12 +24,13 @@ import {
 
 // --- IMPORTANT: PASTE YOUR FIREBASE CONFIG HERE ---
 const firebaseConfig = {
-  apiKey: "AIzaSyDeGWtmMMs_5QukYyyAeaaTU4VbF5-5qDE",
-  authDomain: "ai-nexus-platform-19485.firebaseapp.com",
-  projectId: "ai-nexus-platform-19485",
-  storageBucket: "ai-nexus-platform-19485.firebasestorage.app",
-  messagingSenderId: "994680353516",
-  appId: "1:994680353516:web:8d7842b0a76724d3092bc9",
+  const firebaseConfig = {
+  apiKey: "%VITE_FIREBASE_API_KEY%",
+  authDomain: "%VITE_FIREBASE_AUTH_DOMAIN%",
+  projectId: "%VITE_FIREBASE_PROJECT_ID%",
+  storageBucket: "%VITE_FIREBASE_STORAGE_BUCKET%",
+  messagingSenderId: "%VITE_FIREBASE_MESSAGING_SENDER_ID%",
+  appId: "%VITE_FIREBASE_APP_ID%",
   measurementId: "G-45HW7G81K1"
 };
 // ----------------------------------------------------
