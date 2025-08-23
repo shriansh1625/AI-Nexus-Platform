@@ -1,8 +1,8 @@
 // This is a Vercel Serverless Function
 // It securely runs on the backend, just like the Firebase Function.
 
-// We need to import the GoogleGenerativeAI package
-import { GoogleGenerativeAI } from "@google/generative-ai";
+// UPDATED: Use 'require' for Node.js compatibility on Vercel
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 export default async function handler(request, response) {
     // Handle CORS preflight requests
@@ -27,7 +27,6 @@ export default async function handler(request, response) {
 
         let aiResponseText = "";
 
-        // --- NEW: Added Gemini Logic ---
         if (model === 'gemini') {
             const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
             const geminiModel = genAI.getGenerativeModel({ model: "gemini-pro" });
