@@ -18,7 +18,7 @@
     <!-- Particle Animation Canvas -->
     <canvas id="particle-canvas" class="absolute top-0 left-0 w-full h-full z-0"></canvas>
 
-    <!-- NEW: About Creator Button -->
+    <!-- About Creator Button -->
     <a href="https://shriansh-portfolio.vercel.app/" target="_blank" class="about-creator-btn absolute top-4 right-4 z-20">
         <i class="fas fa-user-circle mr-2"></i>
         About the Creator
@@ -55,8 +55,13 @@
     <!-- Main Application UI (Hidden by default) -->
     <div id="app" class="hidden flex w-full h-full z-10">
         <!-- Sidebar -->
-        <aside class="w-1/4 max-w-xs bg-black/30 backdrop-blur-md p-4 flex flex-col border-r border-white/10 animate-slide-in-left">
-            <h2 class="text-2xl font-bold mb-6 px-2">Conversations</h2>
+        <aside id="sidebar" class="w-full md:w-1/4 md:max-w-xs bg-black/30 backdrop-blur-md p-4 flex flex-col border-r border-white/10 fixed md:relative h-full z-30 -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold px-2">Conversations</h2>
+                <button id="close-sidebar-btn" class="md:hidden text-2xl text-gray-400 hover:text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
             <div id="conversation-history" class="flex-grow overflow-y-auto pr-2">
                 <!-- Conversation history will be populated here -->
             </div>
@@ -71,8 +76,11 @@
         </aside>
 
         <!-- Main Chat Area -->
-        <main class="w-3/4 flex flex-col h-screen bg-black/10 backdrop-blur-sm">
-            <header class="p-4 border-b border-white/10 flex justify-center items-center">
+        <main class="w-full flex flex-col h-screen bg-black/10 backdrop-blur-sm">
+            <header class="p-4 border-b border-white/10 flex justify-between md:justify-center items-center">
+                 <button id="open-sidebar-btn" class="md:hidden text-2xl text-gray-300 hover:text-white">
+                    <i class="fas fa-bars"></i>
+                 </button>
                  <div class="flex items-center space-x-4 bg-black/20 p-2 rounded-lg">
                     <label class="font-semibold">AI Model:</label>
                     <select id="model-selector" class="bg-gray-700/50 text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -80,6 +88,7 @@
                         <option value="deepseek">DeepSeek</option>
                     </select>
                 </div>
+                <div class="w-8 md:hidden"></div> <!-- Spacer for mobile -->
             </header>
             
             <div id="chat-container" class="flex-grow p-6 overflow-y-auto chat-container">
@@ -109,3 +118,4 @@
     <script type="module" src="app.js"></script>
 </body>
 </html>
+
