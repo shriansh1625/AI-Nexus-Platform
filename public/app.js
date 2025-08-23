@@ -24,7 +24,7 @@ import {
 
 // --- IMPORTANT: PASTE YOUR FIREBASE CONFIG HERE ---
 const firebaseConfig = {
-  apiKey: "your_api",
+  apiKey: "AIzaSyDeGWtmMMs_5QukYyyAeaaTU4VbF5-5qDE",
   authDomain: "ai-nexus-platform-19485.firebaseapp.com",
   projectId: "ai-nexus-platform-19485",
   storageBucket: "ai-nexus-platform-19485.firebasestorage.app",
