@@ -1,5 +1,5 @@
 AI Nexus: Your Unified AI Workspace 🚀
-Live Demo: https://ai-nexus-platform-19485.web.app
+Live Demo: https://ai-nexus-platform.vercel.app/
 
 1. 🌟 Project Vision & Motivation
 In an era where artificial intelligence is evolving at lightning speed, a multitude of powerful language models have emerged, each with unique strengths. However, interacting with them often requires navigating separate platforms, creating a fragmented and inefficient user experience. 😫
